@@ -3,17 +3,34 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import jQuery from 'jquery'
+import store from './store'
+import VeeValidate from 'vee-validate';
 
-global.jQuery = jQuery
-global.$ = jQuery
+// global.jQuery = jQuery
+// global.$ = jQuery
 
 Vue.config.productionTip = false
+Vue.use(VeeValidate)
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if(!store.state.authState) {
+      next({
+        path: '/login',
+      })
+    } else {
+      next()
+    }
+  } else {
+    next()
+  }
+})
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
+  store,
   template: '<App/>',
   components: { App }
 })

@@ -1,18 +1,25 @@
 <template>
   <div id="app">
-    <header>
-      <nav-bar></nav-bar>
-    </header>
-    <main>
-      <div class="flex flex-wrap h-screen">
-        <side-bar></side-bar>
-        <div class="md w-5/6 p-4">
-          <router-view></router-view>
+    <div v-if="$store.state.authState">
+      <header>
+        <nav-bar></nav-bar>
+      </header>
+      <main>
+        <div class="flex flex-wrap h-screen">
+          <side-bar></side-bar>
+          <div class="md w-5/6 p-4">
+            <router-view></router-view>
+          </div>
         </div>
-      </div>
-    </main>
+      </main>
+    </div>
+    <div v-else>
+      <router-view></router-view>
+    </div>
   </div>
 </template>
+
+
 
 <script>
 import NavBar from '@/components/NavBar'
