@@ -20,7 +20,7 @@
             <div class="ui stacked segment">
               <div class="field">
                 <div class="ui left icon input">
-                  <i class="user icon"></i>
+                  <i class="mail icon"></i>
                   <input type="email" name="email" placeholder="johndoe@example.com" v-model="email"  v-validate="'required|email'" data-vv-delay="1000">
                   <div class="ui left pointing label" v-show="errors.has('email')">
                       <p class="text-red text-xs italic">{{ errors.first('email') }}</p>

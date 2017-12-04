@@ -16,6 +16,9 @@ const store = new Vuex.Store({
     login (context, payload) {
       context.commit('changeAuthState')
     },
+    register (context, payload) {
+      context.commit('changeAuthState')
+    },
     logout(context, payload) {
       context.commit('changeAuthState')
       return true
