@@ -2,7 +2,7 @@
 <div>
     <!--<div class="md w-5/6 p-4">-->
     <p class="text-2xl font-sans">Recent Orders</p>
-   <div class="my-2">
+   <div class="my-2 bg-white p-2 shadow-md rounded">
      <table class="ui celled table" id="datatable">
        <thead>
          <tr>
