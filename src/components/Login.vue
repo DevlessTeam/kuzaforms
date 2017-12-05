@@ -4,8 +4,8 @@
 
       <div class="ui center aligned grid">
         <div class="column">
-          <h2 class="ui teal image header">
-            <img src="http://kuzaforms.com/images/logo.png" class="image">
+          <h2 class="ui image header">
+            <img src="../assets/logo_bx.png" class="ui image">
             <div class="content">
               <p class="text-grey-darker">Log-in to your account</p>
             </div>
@@ -77,6 +77,3 @@
     }
   }
 </script>
-
-<style lang="css" scoped>
-</style>

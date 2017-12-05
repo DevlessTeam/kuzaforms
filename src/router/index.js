@@ -9,6 +9,8 @@ import FormView from '@/components/FormView'
 import Plugins from '@/components/Plugins'
 import Login from '@/components/Login'
 import Register from '@/components/Register'
+import FormEdit from '@/components/FormEdit'
+import DataForm from '@/components/DataForm'
 import NotFoundComponent from '@/components/NotFoundComponent'
 
 Vue.use(Router)
@@ -42,8 +44,18 @@ const router = new Router({
         },
         {
           path: '/forms/:id',
-          name: 'ViewForm',
+          name: 'DataForm',
+          component: DataForm
+        },
+        {
+          path: '/forms/:id/view',
+          name: 'FormView',
           component: FormView
+        },
+        {
+          path: '/forms/:id/edit',
+          name: 'FormEdit',
+          component: FormEdit
         },
         {
           path: '/plugins',

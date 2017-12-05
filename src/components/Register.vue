@@ -4,8 +4,8 @@
 
       <div class="ui center aligned grid">
         <div class="column">
-          <h2 class="ui teal image header">
-            <img src="http://kuzaforms.com/images/logo.png" class="image">
+          <h2 class="ui image header">
+            <img src="../assets/logo_bx.png" class="image">
             <div class="content">
               <p class="text-grey-darker">Register your account</p>
             </div>
