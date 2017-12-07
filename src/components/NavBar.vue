@@ -34,6 +34,7 @@
 </template>
 
 <script>
+  import Devless from '@/utils/devless'
   import Logo from '@/components/Logo'
 
   export default {
@@ -42,9 +43,17 @@
     },
     methods: {
       async logout () {
-       const result = await this.$store.dispatch('logout')
-       if( result)
-        this.$router.push('/login')
+        
+        localStorage.setItem('token', null)
+        const response = await Devless.call('devless', 'logout')
+        
+        if (response.status_code === 637 && response.payload.result) {
+          const result = await this.$store.dispatch('logout')
+          if(result) {
+            this.$router.push({ name: 'Login', params: { msg: 'Logout successful'}})
+          }
+        }
+        
       }
     }
   }

@@ -1,11 +1,12 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import Devless from '@/utils/devless'
 
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
   state: {
-    authState: true
+    authState: false,
   },
   mutations: {
     changeAuthState(state) {
@@ -22,7 +23,7 @@ const store = new Vuex.Store({
     logout(context, payload) {
       context.commit('changeAuthState')
       return true
-    }
+    },
   }
 });
 

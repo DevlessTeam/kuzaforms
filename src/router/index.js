@@ -9,7 +9,7 @@ import FormView from '@/components/FormView'
 import Plugins from '@/components/Plugins'
 import Login from '@/components/Login'
 import Register from '@/components/Register'
-import FormEdit from '@/components/FormEdit'
+// import FormEdit from '@/components/FormEdit'
 import DataForm from '@/components/DataForm'
 import NotFoundComponent from '@/components/NotFoundComponent'
 
@@ -52,11 +52,11 @@ const router = new Router({
           name: 'FormView',
           component: FormView
         },
-        {
-          path: '/forms/:id/edit',
-          name: 'FormEdit',
-          component: FormEdit
-        },
+        // {
+        //   path: '/forms/:id/edit',
+        //   name: 'FormEdit',
+        //   component: FormEdit
+        // },
         {
           path: '/plugins',
           name: 'Plugins',
@@ -70,11 +70,11 @@ const router = new Router({
       name: 'Login',
       component: Login
     },
-    {
-      path: '/register',
-      name: 'Register',
-      component: Register
-    },
+    // {
+    //   path: '/register',
+    //   name: 'Register',
+    //   component: Register
+    // },
     {
       path: '*',
       component: NotFoundComponent

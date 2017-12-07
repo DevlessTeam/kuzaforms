@@ -16,6 +16,11 @@
               <li>Please try again</li>
             </ul>
           </div>
+          <div class="ui error message" v-show="$route.params.msg">
+            <div class="header">
+              {{ $route.params.msg }}
+            </div>
+          </div>
           <form class="ui fluid form" @submit.prevent="validateBeforeSubmit">
             <div class="ui stacked segment">
               <div class="field">
@@ -36,13 +41,14 @@
                   </div>
                 </div>
               </div>
-              <button class="ui fluid large submit button">Login</button>
+              <button class="ui fluid large submit button" :disabled="disabled">Login</button>
             </div>
             <div class="ui error message"></div>
           </form>
           <div class="ui message">
             <span class="text-grey">New to us?</span>
-            <router-link :to="{name: 'Register'}" class="text-black font-semibold">Sign Up</router-link>
+            <!--<router-link :to="{name: 'Register'}" class="text-black font-semibold">Sign Up</router-link>-->
+            <a href="http://kuzaforms.com" target="_blank" class="text-black font-semibold">Sign Up</a>
           </div>
         </div>
       </div>
@@ -51,8 +57,12 @@
 </template>
 
 <script>
+  import Devless from '@/utils/devless'
+  import store from '@/store'
+
   export default {
     data: () => ({
+        disabled: false,
         email: undefined,
         password: undefined,
         errorState: false
@@ -62,17 +72,33 @@
         this.$validator.validateAll().then((result) => {
           if (result) {
             // eslint-disable-next-line
-            this.$store.dispatch('login')
+            this.disabled = true;
+            this.login()
+            // this.$store.dispatch('login')
             return;
           }
-  
+          this.disabled = false;
           this.errorState = !this.errorState
         });
+      },
+      async login () {
+        const response = await Devless.call('devless', 'login', ['', this.email, '', this.password])
+        if (response.status_code === 637) {
+          if (response.payload.result) {
+            localStorage.setItem('token', response.payload.result.token)
+            // Devless.setToken(response.payload.result.token)
+            this.$store.dispatch('login')
+            return true
+          }
+          this.errorState = !this.errorState
+        } else {
+          alert('An unexpected error. Contact Adminstrator!')
+        }
       }
     },
     created() {
       if (this.$store.state.authState) {
-        return this.$router.push('/');
+        return this.$router.push({name: 'Dashboard', params: { welcomeAlt: true }});
       }
     }
   }
