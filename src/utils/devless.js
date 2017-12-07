@@ -11,7 +11,6 @@ const nonce = (min, max) => {
 };
 
 const requestProcessor = (url, methodType, data=null) => {
-  console.log(header)
   if (methodType !== 'GET') {
     data = JSON.stringify(data);
   }

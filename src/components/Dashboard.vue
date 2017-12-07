@@ -82,10 +82,12 @@
         if (response.status_code === 625) {
           this.tableData = response.payload.results
           this.$nextTick(() => {
-            this.isActive = !this.isActive
-            $('#datatable').DataTable({
-                "order": [[ 7, "asc" ]]
-            })
+            if (this.tableData.length !== 0) {
+              this.isActive = !this.isActive
+              $('#datatable').DataTable({
+                  "order": [[ 7, "asc" ]]
+              })
+            }
           })
          
           return true

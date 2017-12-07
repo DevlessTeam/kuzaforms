@@ -1,6 +1,9 @@
 <template>
   <div>
     <!--<div class="md w-5/6 p-4">-->
+    <div class="ui message success" v-show="$route.params.msg">
+      <div class="header">{{ $route.params.msg }}</div>
+    </div>
     <p class="text-2xl font-sans">Farmable Orders</p>
     <div class="my-2 bg-white p-2 shadow-md rounded">
       <table class="ui celled table" id="datatable">
@@ -62,10 +65,12 @@
         if (response.status_code === 625) {
           this.tableData = response.payload.results
           this.$nextTick(() => {
-            this.isActive = !this.isActive
-            $('#datatable').DataTable({
-                "order": [[ 7, "asc" ]]
-            })
+            if (this.tableData.length !== 0) {
+              this.isActive = !this.isActive
+              $('#datatable').DataTable({
+                  "order": [[ 7, "asc" ]]
+              })
+            }
           })
 
           return true

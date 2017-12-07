@@ -180,9 +180,13 @@
       },
       async deleteRecord () {
         if (confirm('Are you sure?')) {
+          
+          const token = localStorage.getItem('token')
+          Devless.setToken(token)
+
           const response = await Devless.deleteData('farmable', 'orders', 'id', this.$route.params.id)
           if (response.status_code === 636) {
-            this.$router.go('/forms/1')
+            this.$router.go({name: 'DataForm', params: { id: 1, msg: 'Record deleted successfully'}})
             return 
           }
 
