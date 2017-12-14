@@ -12,6 +12,7 @@
      <table class="ui celled table" id="datatable">
        <thead>
          <tr>
+          <th>#</th>
            <th>Name</th>
            <th>Phone Number</th>
            <th>Email</th>
@@ -25,6 +26,7 @@
         </thead>
         <tbody>
           <tr v-for="record in tableData">
+            <td>{{ record.id }}</td>
             <td>{{ record.name }}</td>
             <td>0{{ record.number }}</td>
             <td>{{ record.email }}</td>
@@ -32,7 +34,7 @@
             <td>{{ record.delivery_time }}</td>
             <td>{{ record.total_quantity }}</td>
             <td>{{ record.total_payable }}</td>
-            <td>{{ record.timestamp }}</td>
+            <td>{{ record.created_at }}</td>
             <td>
               <router-link :to="{name: 'FormView', params: { id: record.id, data: record }}">
                 <a class="bg-grey p-2 rounded hover:bg-blue hover:text-white">
@@ -82,10 +84,15 @@
         if (response.status_code === 625) {
           this.tableData = response.payload.results
           this.$nextTick(() => {
-            if (this.tableData.length !== 0) {
+            if (response.payload.results.length !== 0) {
               this.isActive = !this.isActive
               $('#datatable').DataTable({
-                  "order": [[ 7, "asc" ]]
+                  "order": [[ 0, "desc" ]]
+              })
+            } else {
+              this.isActive = !this.isActive
+              $('#datatable').DataTable({
+                  "order": [[ 0, "desc" ]]
               })
             }
           })

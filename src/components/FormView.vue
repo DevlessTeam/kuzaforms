@@ -2,6 +2,7 @@
   <div class="md p-4">
     <p class="text-2xl font-sans tracking-tight">Order # {{ $route.params.id }}</p>
     <div class="container">
+    <a href="#" class="ui labeled icon button" @click="goBack"><i class="left arrow icon"></i> Back</a>
       <div class="ui compact menu">
         <a class="item" :class="{active: isView}" @click="selectTab('view')">
           <i class="unhide icon"></i>
@@ -18,7 +19,7 @@
       <div class="item" v-show="isEdit"><a class="ui button green" @click="updateRecord">Update</a></div>
       </div>
       <div class="float-right">
-        <a class="ui teal right ribbon label">Payment completed</a>
+        <a class="ui right ribbon label" :class="{'orange': payment_status === 'issued', 'teal': payment_status === 'completed', 'yellow': payment_status === 'pending'}">Payment {{payment_status}}</a>
       </div>
     </div>
 
@@ -110,6 +111,7 @@
       error: undefined,
       isView: true,
       isEdit: false,
+      payment_status: undefined,
       fieldTypes: [
         {
           name: 'Boneless Stewing Beef',
@@ -154,11 +156,15 @@
     created () {
       if ( this.$route.params.data !== undefined) {
         this.record = this.$route.params.data
+        this.getOrderStatus()
       } else {
         this.fetchData()
       }
     },
     methods: {
+      goBack() {
+        this.$router.go(-1)
+      },
       selectTab (tab) {
         if (tab === 'view') {
           this.isView = true;
@@ -173,6 +179,16 @@
           where: `id,${this.$route.params.id}`
         })
         this.record = response.payload.results[0]
+      },
+      async getOrderStatus() {
+        const res = await Devless.queryData('payments', 'orders', {
+          where: `orders_id,${this.$route.params.id}`
+        });
+        if(res.status_code !== 700) {
+          this.payment_status = `${res.payload}`
+        } else {
+          this.payment_status = 'not found'
+        }
       },
       formatPrice(value) {
         let val = (value/1).toFixed(2).replace(',', ',')

@@ -26,7 +26,8 @@
           </a>
         </div>
         <div>
-          <a class="inline-block text-sm px-4 py-2 text-black bg-white leading-none border rounded border-black hover:border-transparent hover:text-black hover:bg-blue mt-4 lg:mt-0" @click="logout">Logout</a>
+          <!--<a class="inline-block text-sm px-4 py-2 text-black bg-white leading-none border rounded border-black hover:border-transparent hover:text-black hover:bg-blue mt-4 lg:mt-0" @click="logout">Logout</a>-->
+          <button class="inline-block text-sm px-4 py-2 text-black bg-white leading-none border rounded border-black hover:border-transparent hover:text-black hover:bg-blue mt-4 lg:mt-0" @click="logout">Logout</button>
         </div>
       </div>
     </nav>
@@ -46,13 +47,14 @@
         
         localStorage.setItem('token', null)
         const response = await Devless.call('devless', 'logout')
+        console.log(response)
         
-        if (response.status_code === 637 && response.payload.result) {
+        // if (response.status_code === 637 && response.payload.result) {
           const result = await this.$store.dispatch('logout')
           if(result) {
             this.$router.push({ name: 'Login', params: { msg: 'Logout successful'}})
           }
-        }
+        // }
         
       }
     }

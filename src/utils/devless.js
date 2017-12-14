@@ -1,5 +1,5 @@
-const host_url = 'http://devless.io:6060/api/v1/service/';
-const host_token = '9a9d2ec4768c7dd1718be58920a17330';
+const host_url = 'https://kuzaforms.herokuapp.com/api/v1/service/';
+const host_token = '138b2f9112f337262a6a69f67936dcc5';
 
 let header = {
   'content-type': 'application/json',
