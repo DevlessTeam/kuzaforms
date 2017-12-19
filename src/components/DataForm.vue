@@ -27,17 +27,20 @@
             <td>{{ record.name }}</td>
             <td>0{{ record.number }}</td>
             <td>{{ record.email }}</td>
-            <td>{{ record.delivery_location }}</td>
+            <td>{{ JSON.parse(record.delivery_location).name }}</td>
             <td>{{ record.delivery_time }}</td>
             <td>{{ record.total_quantity }}</td>
             <td>{{ record.total_payable }}</td>
             <td>{{ record.created_at }}</td>
             <td>
-              <router-link :to="{name: 'FormView', params: { id: record.id, data: record }}">
-                <a class="bg-grey p-2 rounded hover:bg-blue hover:text-white">
-                  <i class="fa fa-eye"></i>
+              <div class="flex justify-between">
+                <router-link :to="{name: 'FormView', params: { id: record.id, data: record }}" class="bg-grey p-2 rounded hover:bg-blue hover:text-white">
+                    <i class="fa fa-eye"></i>
+                </router-link>
+                <a :href="JSON.parse(record.delivery_location).url" target="_blank" class="bg-teal p-2 rounded hover:bg-teal-dark text-white hover:text-white">
+                  <i class="fa fa-location-arrow"></i>
                 </a>
-              </router-link>
+              </div>
             </td>
           </tr>
         </tbody>
