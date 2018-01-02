@@ -8,18 +8,18 @@
                     <a class='btn text-grey-darker no-underline' href="/">
                         <i class="fa fa-tachometer mr-2"></i> Dashboard</a>
                 </router-link>
-                <router-link class="p-2 rounded my-4" active-class="bg-white border font-semibold shadow-lg" :to="{name: 'Forms'}" tag="li">
-                    <a class='text-grey-darker no-underline' href="/activity">
-                        <i class="fa fa-file-text mr-2"></i> Forms</a>
-                </router-link>
                 <router-link class="p-2 rounded my-4" active-class="bg-white border font-semibold shadow-lg" tag="li" :to="{name: 'Analytics'}">
                     <a class='text-grey-darker no-underline'>
-                        <i class="fa fa-pie-chart mr-2"></i>Analytics
+                        <i class="fa fa-pie-chart mr-2"></i>Menus
                     </a>
+                </router-link>
+                <router-link class="p-2 rounded my-4" active-class="bg-white border font-semibold shadow-lg" :to="{name: 'Items'}" tag="li">
+                    <a class='text-grey-darker no-underline' href="/activity">
+                        <i class="fa fa-file-text mr-2"></i> Ingredients</a>
                 </router-link>
                 <router-link tag='li' :to="{name: 'Plugins'}" active-class="bg-white border font-semibold shadow-lg" class="my-4 p-2 rounded">
                     <a class='new text-grey-darker no-underline'>
-                        <i class="fa fa-puzzle-piece mr-2"></i> Plugins
+                        <i class="fa fa-puzzle-piece mr-2"></i> Meals
                     </a>
                 </router-link>
                 <router-link tag='li' :to="{name: 'Settings'}" active-class="bg-white border font-semibold shadow-lg" class="my-4 p-2 rounded">

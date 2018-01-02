@@ -4,7 +4,7 @@ import Main from '@/components/Main'
 import Dashboard from '@/components/Dashboard'
 import Settings from '@/components/Settings'
 import Analytics from '@/components/Analytics'
-import Forms from '@/components/Forms'
+import Items from '@/components/Items'
 import FormView from '@/components/FormView'
 import Plugins from '@/components/Plugins'
 import Login from '@/components/Login'
@@ -33,14 +33,14 @@ const router = new Router({
           component: Settings
         },
         {
-          path: 'analytics',
+          path: 'menu',
           name: 'Analytics',
           component: Analytics
         },
         {
-          path: '/forms',
-          name: 'Forms',
-          component: Forms
+          path: '/items',
+          name: 'Items',
+          component: Items
         },
         {
           path: '/forms/:id',
@@ -58,7 +58,7 @@ const router = new Router({
           component: FormEdit
         },
         {
-          path: '/plugins',
+          path: '/meals',
           name: 'Plugins',
           component: Plugins
         }
