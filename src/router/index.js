@@ -6,7 +6,7 @@ import Settings from '@/components/Settings'
 import Analytics from '@/components/Analytics'
 import Items from '@/components/Items'
 import FormView from '@/components/FormView'
-import Plugins from '@/components/Plugins'
+import Meal from '@/components/Meal'
 import Login from '@/components/Login'
 import Register from '@/components/Register'
 import FormEdit from '@/components/FormEdit'
@@ -59,8 +59,8 @@ const router = new Router({
         },
         {
           path: '/meals',
-          name: 'Plugins',
-          component: Plugins
+          name: 'Meal',
+          component: Meal
         }
       ],
       meta: { requiresAuth: true }

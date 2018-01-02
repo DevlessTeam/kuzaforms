@@ -103,7 +103,7 @@ const Devless = {
           params: [
             {
               delete: true,
-              where: `${identifier}=${value}`
+              where: `${identifier},${value}`
             }
           ]
         }
