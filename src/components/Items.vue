@@ -47,6 +47,7 @@
       async fetchItems () {
         const res = await Devless.queryData('mkoo', 'item')
         this.items = res.payload.results;
+        $('table').DataTable()
       } 
     },
     mounted () {
