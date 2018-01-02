@@ -1,9 +1,13 @@
-const host_url = 'https://dvshopit.herokuapp.com/api/v1/service/';
-const host_token = '76b4e42f8a028374633fd3b89b9ca04d';
+const host_url = 'https://kuzaforms.herokuapp.com/api/v1/service/';
+const host_token = '138b2f9112f337262a6a69f67936dcc5';
 
 let header = {
   'content-type': 'application/json',
   'devless-token': host_token
+};
+
+const nonce = (min, max) => {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
 const requestProcessor = (url, methodType, data=null) => {
@@ -19,6 +23,9 @@ const requestProcessor = (url, methodType, data=null) => {
     .then(res => res.json())
     .then((resJson) => {
       return resJson;
+    })
+    .catch((error) => {
+      return error;
     })
 }
 
@@ -67,12 +74,17 @@ const Devless = {
 
     return result;
   },
-  updateData: (service, table, identifier, value) => {
+  updateData: (service, table, identifier, value, data) => {
     const body = {
       resource: [
         {
           name: table,
-          params: body
+          params: [
+            {
+              where: identifier + "," + value,
+              data: [data]
+            }
+          ]
         }
       ]
     };
@@ -83,19 +95,41 @@ const Devless = {
 
     return res;
   },
-  deleteData: (service, table, identifier) => {
+  deleteData: (service, table, identifier, value) => {
     const body = {
       resource: [
         {
           name: table,
-          params: body
+          params: [
+            {
+              delete: true,
+              where: `${identifier}=${value}`
+            }
+          ]
         }
       ]
     }
 
+    const url = `${host_url}${service}/db`;
+    
+    let res = requestProcessor(url, 'DELETE', body);
+
+    return res;
+
   },
   call: (service, method, data=[]) => {
+    const body = {
+      jsonrpc: "2.0",
+      method: service,
+      id: nonce(1, 10000000),
+      params: data
+    };
 
+    const url = `${host_url}${service}/rpc?action=${method}`;
+
+    let res = requestProcessor(url, 'POST', body);
+
+    return res;
   },
   setToken: (token) => {
     header['devless-user-token'] = token;
