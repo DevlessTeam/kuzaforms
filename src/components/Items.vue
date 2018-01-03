@@ -40,10 +40,10 @@
           </tr>
         </tbody>
       </table>
-      <div class="ui modal">
+      <div class="ui modal" id="items">
         <div class="header">Ingredient</div>
         <div class="content">
-          <form class="ui form" @submit.prevent="addItem">
+          <form class="ui form" @submit.prevent>
             <div class="field">
               <label>Name</label>
               <input type="text" v-model="name" placeholder="Name of Ingredient">
@@ -125,12 +125,12 @@
         this.editMode = false
         this.name = ''
         this.description = ''
-        $('.ui.modal')
+        $('#items')
           .modal('show')
           ;
       },
       hideModal() {
-        $('.ui.modal')
+        $('#items')
           .modal('hide')
           ;
       },

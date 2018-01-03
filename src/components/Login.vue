@@ -51,6 +51,8 @@
 </template>
 
 <script>
+  import Devless from '@/utils/devless'
+  
   export default {
     data: () => ({
         email: undefined,
@@ -68,6 +70,11 @@
   
           this.errorState = !this.errorState
         });
+      },
+      async login () {
+        const res = await Devless.call('devless', 'login', {
+
+        })
       }
     },
     created() {

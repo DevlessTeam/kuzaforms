@@ -1,16 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Main from '@/components/Main'
-import Dashboard from '@/components/Dashboard'
 import Settings from '@/components/Settings'
-import Analytics from '@/components/Analytics'
+import Menu from '@/components/Menu'
 import Items from '@/components/Items'
-import FormView from '@/components/FormView'
+import MenuView from '@/components/MenuView'
 import Meal from '@/components/Meal'
 import Login from '@/components/Login'
 import Register from '@/components/Register'
-import FormEdit from '@/components/FormEdit'
-import DataForm from '@/components/DataForm'
 import NotFoundComponent from '@/components/NotFoundComponent'
 
 Vue.use(Router)
@@ -24,8 +21,8 @@ const router = new Router({
       children: [
         {
           path: '/',
-          name: 'Dashboard',
-          component: Dashboard
+          name: 'Menu',
+          component: Menu
         },
         {
           path: '/settings',
@@ -33,29 +30,14 @@ const router = new Router({
           component: Settings
         },
         {
-          path: 'menu',
-          name: 'Analytics',
-          component: Analytics
-        },
-        {
           path: '/items',
           name: 'Items',
           component: Items
         },
         {
-          path: '/forms/:id',
-          name: 'DataForm',
-          component: DataForm
-        },
-        {
-          path: '/forms/:id/view',
-          name: 'FormView',
-          component: FormView
-        },
-        {
-          path: '/forms/:id/edit',
-          name: 'FormEdit',
-          component: FormEdit
+          path: '/menu/:id/',
+          name: 'MenuView',
+          component: MenuView
         },
         {
           path: '/meals',
