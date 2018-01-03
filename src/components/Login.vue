@@ -90,6 +90,7 @@
             this.$store.dispatch('login')
             return true
           }
+          this.disabled = false;
           this.errorState = !this.errorState
         } else {
           alert('An unexpected error. Contact Adminstrator!')
