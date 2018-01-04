@@ -64,7 +64,7 @@
 									MONDAY (Lunch)
 								</label>
 								<div v-if="options.length !== 0">
-									<multiselect v-model="meals.monday.lunch" :options="options" :multiple="true" track-by="name" label="name" placeholder="Add meal">
+									<multiselect :max="2" v-model="meals.monday.lunch" :options="options" :multiple="true" track-by="name" label="name" placeholder="Add meal">
 									</multiselect>
 								</div>
 								<div v-else>
@@ -76,7 +76,7 @@
 									MONDAY (Dinner)
 								</label>
 								<div v-if="options.length !== 0">
-									<multiselect v-model="meals.monday.dinner" :options="options" :multiple="true" track-by="name" label="name" placeholder="Add meal">
+									<multiselect :max="2" v-model="meals.monday.dinner" :options="options" :multiple="true" track-by="name" label="name" placeholder="Add meal">
 									</multiselect>
 								</div>
 								<div v-else>
@@ -90,7 +90,7 @@
 									tuesday (Lunch)
 								</label>
 								<div v-if="options.length !== 0">
-									<multiselect v-model="meals.tuesday.lunch" :options="options" :multiple="true" track-by="name" label="name" placeholder="Add meal">
+									<multiselect :max="2" v-model="meals.tuesday.lunch" :options="options" :multiple="true" track-by="name" label="name" placeholder="Add meal">
 									</multiselect>
 								</div>
 								<div v-else>
@@ -102,7 +102,7 @@
 									tuesday (Dinner)
 								</label>
 								<div v-if="options.length !== 0">
-									<multiselect v-model="meals.tuesday.dinner" :options="options" :multiple="true" track-by="name" label="name" placeholder="Add meal">
+									<multiselect :max="2" v-model="meals.tuesday.dinner" :options="options" :multiple="true" track-by="name" label="name" placeholder="Add meal">
 									</multiselect>
 								</div>
 								<div v-else>
@@ -116,7 +116,7 @@
 									wednesday (Lunch)
 								</label>
 								<div v-if="options.length !== 0">
-									<multiselect v-model="meals.wednesday.lunch" :options="options" :multiple="true" track-by="name" label="name" placeholder="Add meal">
+									<multiselect :max="2" v-model="meals.wednesday.lunch" :options="options" :multiple="true" track-by="name" label="name" placeholder="Add meal">
 									</multiselect>
 								</div>
 								<div v-else>
@@ -128,7 +128,7 @@
 									wednesday (Dinner)
 								</label>
 								<div v-if="options.length !== 0">
-									<multiselect v-model="meals.wednesday.dinner" :options="options" :multiple="true" track-by="name" label="name" placeholder="Add meal">
+									<multiselect :max="2" v-model="meals.wednesday.dinner" :options="options" :multiple="true" track-by="name" label="name" placeholder="Add meal">
 									</multiselect>
 								</div>
 								<div v-else>
@@ -142,7 +142,7 @@
 									thursday (Lunch)
 								</label>
 								<div v-if="options.length !== 0">
-									<multiselect v-model="meals.thursday.lunch" :options="options" :multiple="true" track-by="name" label="name" placeholder="Add meal">
+									<multiselect :max="2" v-model="meals.thursday.lunch" :options="options" :multiple="true" track-by="name" label="name" placeholder="Add meal">
 									</multiselect>
 								</div>
 								<div v-else>
@@ -154,7 +154,7 @@
 									thursday (Dinner)
 								</label>
 								<div v-if="options.length !== 0">
-									<multiselect v-model="meals.thursday.dinner" :options="options" :multiple="true" track-by="name" label="name" placeholder="Add meal">
+									<multiselect :max="2" v-model="meals.thursday.dinner" :options="options" :multiple="true" track-by="name" label="name" placeholder="Add meal">
 									</multiselect>
 								</div>
 								<div v-else>
@@ -168,7 +168,7 @@
 									saturday (Lunch)
 								</label>
 								<div v-if="options.length !== 0">
-									<multiselect v-model="meals.saturday.lunch" :options="options" :multiple="true" track-by="name" label="name" placeholder="Add meal">
+									<multiselect :max="2" v-model="meals.saturday.lunch" :options="options" :multiple="true" track-by="name" label="name" placeholder="Add meal">
 									</multiselect>
 								</div>
 								<div v-else>
@@ -180,7 +180,7 @@
 									saturday (Dinner)
 								</label>
 								<div v-if="options.length !== 0">
-									<multiselect v-model="meals.saturday.dinner" :options="options" :multiple="true" track-by="name" label="name" placeholder="Add meal">
+									<multiselect :max="2" v-model="meals.saturday.dinner" :options="options" :multiple="true" track-by="name" label="name" placeholder="Add meal">
 									</multiselect>
 								</div>
 								<div v-else>
@@ -194,7 +194,7 @@
 									friday (Lunch)
 								</label>
 								<div v-if="options.length !== 0">
-									<multiselect v-model="meals.friday.lunch" :options="options" :multiple="true" track-by="name" label="name" placeholder="Add meal">
+									<multiselect :max="2" v-model="meals.friday.lunch" :options="options" :multiple="true" track-by="name" label="name" placeholder="Add meal">
 									</multiselect>
 								</div>
 								<div v-else>
@@ -206,7 +206,7 @@
 									friday (Dinner)
 								</label>
 								<div v-if="options.length !== 0">
-									<multiselect v-model="meals.friday.dinner" :options="options" :multiple="true" track-by="name" label="name" placeholder="Add meal">
+									<multiselect :max="2" v-model="meals.friday.dinner" :options="options" :multiple="true" track-by="name" label="name" placeholder="Add meal">
 									</multiselect>
 								</div>
 								<div v-else>
