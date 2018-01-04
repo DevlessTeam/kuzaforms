@@ -30,9 +30,9 @@
 						<td>https://kuzaforms.com/mkoo?link_id={{ menu.link }}</td>
 						<td>{{ menu.valid_until }}</td>
 						<td>
-							<button class="ui blue button">
+							<!--<button class="ui blue button">
 								<i class="fa fa-eye"></i>
-							</button>
+							</button>-->
 							<router-link class="ui positive button" tag="button" :to="{name: 'MenuView', params: { id: menu.id, details: menu }}">
 									<i class="fa fa-table"></i>
 							</router-link>
