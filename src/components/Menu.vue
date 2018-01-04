@@ -27,12 +27,10 @@
 				<tbody>
 					<tr v-for="(menu, index) in menus">
 						<td>{{ menu.id }}</td>
-						<td>https://kuzaforms.com/mkoo?link_id={{ menu.link }}</td>
+						<td>{{ formatUrl(menu.link) }}</td>
 						<td>{{ menu.valid_until }}</td>
 						<td>
-							<!--<button class="ui blue button">
-								<i class="fa fa-eye"></i>
-							</button>-->
+							<button class="ui blue button" v-clipboard:copy="formatUrl(menu.link)" v-clipboard:success="onCopy">Copy</button>
 							<router-link class="ui positive button" tag="button" :to="{name: 'MenuView', params: { id: menu.id, details: menu }}">
 									<i class="fa fa-table"></i>
 							</router-link>
@@ -283,6 +281,18 @@
 				$('.ui.modal')
 					.modal('hide')
 					;
+			},
+			formatUrl (link) {
+				return `https://kuzaforms.com/mkoo?link_id=${link}`
+			},
+			onCopy () {
+				this.msg = 'Copied to clipboard'
+				this.color = 'violet'
+				var self = this;
+				setTimeout(function() {
+					self.msg = undefined
+					self.color = undefined
+				}, 1000)
 			},
 			async fetchMenu() {
 				const res = await Devless.queryData('mkoo', 'menu')

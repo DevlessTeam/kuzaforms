@@ -6,6 +6,10 @@ import router from './router'
 import store from './store'
 import VeeValidate from 'vee-validate';
 
+import VueClipboard from 'vue-clipboard2'
+
+Vue.use(VueClipboard)
+
 // global.jQuery = jQuery
 // global.$ = jQuery
 

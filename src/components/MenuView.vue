@@ -109,7 +109,17 @@
           this.orders = resz;
 
           this.$nextTick(function () {
-            $('#datatable').DataTable();
+            var table = $('#datatable').DataTable({
+              buttons: [
+                'excel',
+                'csv',
+                'pdf'
+              ],
+              lengthChange: false,
+            });
+
+            table.buttons().container()
+              .appendTo( $('div.eight.column:eq(0)', table.table().container()) );
           })
 
           return
