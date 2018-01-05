@@ -52,8 +52,8 @@
               <label>Description</label>
               <input type="text" v-model="description" placeholder="Description of Ingredient">
             </div>
-            <button v-show="!editMode" class="ui button" @click="addItem" :disabled="disabled"><i class="fa fa-spinner fa-spin mr-2" v-show="loading"></i>Add Ingredient</button>
-            <a v-show="editMode" class="ui button" @click="updateItem" :disabled="disabled"><i class="fa fa-spinner fa-spin mr-2" v-show="loading"></i>Submit Ingredient</a>
+            <button v-show="!editMode" class="ui button" @click="addItem" :disabled="disabled"><i class="fa fa-spinner fa-spin mr-2" v-show="loading"></i>Save</button>
+            <a v-show="editMode" class="ui button" @click="updateItem" :disabled="disabled"><i class="fa fa-spinner fa-spin mr-2" v-show="loading"></i>Save</a>
           </form>
 
         </div>

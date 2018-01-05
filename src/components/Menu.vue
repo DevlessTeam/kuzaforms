@@ -1,7 +1,7 @@
 <template>
 	<div class="md w-full">
 		<p class="text-2xl font-sans">Menus</p>
-		<div class="ui compact menu">
+		<div class="ui compact menu" v-show="newBtn">
 			<a class="item" @click="showModal">
 				<i class="plus icon"></i>
 				New
@@ -42,10 +42,10 @@
 				</tbody>
 			</table>
 			<div class="ui small modal" id="menu">
-				<div class="header">Menu</div>
+				<div class="header">Meals</div>
 				<div class="content">
 					<div class="w-full max-w-lg">
-						<div class="flex flex-wrap -mx-3 mb-6">
+						<!--<div class="flex flex-wrap -mx-3 mb-6">
 							<div class="w-full px-3">
 								<label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-password">
 									Valid Until
@@ -55,14 +55,14 @@
 							</div>
 						</div>
 						<div class="ui divider"></div>
-						<h3 class="ui header">Meals</h3>
+						<h3 class="ui header">Meals</h3>-->
 						<div class="flex flex-wrap -mx-3 mb-6">
 							<div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
 								<label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-first-name">
 									MONDAY (Lunch)
 								</label>
 								<div v-if="options.length !== 0">
-									<multiselect :max="2" v-model="meals.monday.lunch" :options="options" :multiple="true" track-by="name" label="name" placeholder="Add meal">
+									<multiselect v-model="meals.monday.lunch" :options="options" :multiple="true" track-by="name" label="name" placeholder="Add meal">
 									</multiselect>
 								</div>
 								<div v-else>
@@ -74,7 +74,7 @@
 									MONDAY (Dinner)
 								</label>
 								<div v-if="options.length !== 0">
-									<multiselect :max="2" v-model="meals.monday.dinner" :options="options" :multiple="true" track-by="name" label="name" placeholder="Add meal">
+									<multiselect v-model="meals.monday.dinner" :options="options" :multiple="true" track-by="name" label="name" placeholder="Add meal">
 									</multiselect>
 								</div>
 								<div v-else>
@@ -88,7 +88,7 @@
 									tuesday (Lunch)
 								</label>
 								<div v-if="options.length !== 0">
-									<multiselect :max="2" v-model="meals.tuesday.lunch" :options="options" :multiple="true" track-by="name" label="name" placeholder="Add meal">
+									<multiselect v-model="meals.tuesday.lunch" :options="options" :multiple="true" track-by="name" label="name" placeholder="Add meal">
 									</multiselect>
 								</div>
 								<div v-else>
@@ -100,7 +100,7 @@
 									tuesday (Dinner)
 								</label>
 								<div v-if="options.length !== 0">
-									<multiselect :max="2" v-model="meals.tuesday.dinner" :options="options" :multiple="true" track-by="name" label="name" placeholder="Add meal">
+									<multiselect v-model="meals.tuesday.dinner" :options="options" :multiple="true" track-by="name" label="name" placeholder="Add meal">
 									</multiselect>
 								</div>
 								<div v-else>
@@ -114,7 +114,7 @@
 									wednesday (Lunch)
 								</label>
 								<div v-if="options.length !== 0">
-									<multiselect :max="2" v-model="meals.wednesday.lunch" :options="options" :multiple="true" track-by="name" label="name" placeholder="Add meal">
+									<multiselect v-model="meals.wednesday.lunch" :options="options" :multiple="true" track-by="name" label="name" placeholder="Add meal">
 									</multiselect>
 								</div>
 								<div v-else>
@@ -126,7 +126,7 @@
 									wednesday (Dinner)
 								</label>
 								<div v-if="options.length !== 0">
-									<multiselect :max="2" v-model="meals.wednesday.dinner" :options="options" :multiple="true" track-by="name" label="name" placeholder="Add meal">
+									<multiselect v-model="meals.wednesday.dinner" :options="options" :multiple="true" track-by="name" label="name" placeholder="Add meal">
 									</multiselect>
 								</div>
 								<div v-else>
@@ -140,7 +140,7 @@
 									thursday (Lunch)
 								</label>
 								<div v-if="options.length !== 0">
-									<multiselect :max="2" v-model="meals.thursday.lunch" :options="options" :multiple="true" track-by="name" label="name" placeholder="Add meal">
+									<multiselect v-model="meals.thursday.lunch" :options="options" :multiple="true" track-by="name" label="name" placeholder="Add meal">
 									</multiselect>
 								</div>
 								<div v-else>
@@ -152,7 +152,7 @@
 									thursday (Dinner)
 								</label>
 								<div v-if="options.length !== 0">
-									<multiselect :max="2" v-model="meals.thursday.dinner" :options="options" :multiple="true" track-by="name" label="name" placeholder="Add meal">
+									<multiselect v-model="meals.thursday.dinner" :options="options" :multiple="true" track-by="name" label="name" placeholder="Add meal">
 									</multiselect>
 								</div>
 								<div v-else>
@@ -166,7 +166,7 @@
 									saturday (Lunch)
 								</label>
 								<div v-if="options.length !== 0">
-									<multiselect :max="2" v-model="meals.saturday.lunch" :options="options" :multiple="true" track-by="name" label="name" placeholder="Add meal">
+									<multiselect v-model="meals.saturday.lunch" :options="options" :multiple="true" track-by="name" label="name" placeholder="Add meal">
 									</multiselect>
 								</div>
 								<div v-else>
@@ -178,7 +178,7 @@
 									saturday (Dinner)
 								</label>
 								<div v-if="options.length !== 0">
-									<multiselect :max="2" v-model="meals.saturday.dinner" :options="options" :multiple="true" track-by="name" label="name" placeholder="Add meal">
+									<multiselect v-model="meals.saturday.dinner" :options="options" :multiple="true" track-by="name" label="name" placeholder="Add meal">
 									</multiselect>
 								</div>
 								<div v-else>
@@ -192,7 +192,7 @@
 									friday (Lunch)
 								</label>
 								<div v-if="options.length !== 0">
-									<multiselect :max="2" v-model="meals.friday.lunch" :options="options" :multiple="true" track-by="name" label="name" placeholder="Add meal">
+									<multiselect v-model="meals.friday.lunch" :options="options" :multiple="true" track-by="name" label="name" placeholder="Add meal">
 									</multiselect>
 								</div>
 								<div v-else>
@@ -204,7 +204,7 @@
 									friday (Dinner)
 								</label>
 								<div v-if="options.length !== 0">
-									<multiselect :max="2" v-model="meals.friday.dinner" :options="options" :multiple="true" track-by="name" label="name" placeholder="Add meal">
+									<multiselect v-model="meals.friday.dinner" :options="options" :multiple="true" track-by="name" label="name" placeholder="Add meal">
 									</multiselect>
 								</div>
 								<div v-else>
@@ -214,7 +214,7 @@
 						</div>
 					</div>
 					<button v-show="!editMode" class="ui button" @click="addMenu" :disabled="disabled">
-						<i class="fa fa-spinner fa-spin mr-2" v-show="disabled"></i>Add Menu</button>
+						<i class="fa fa-spinner fa-spin mr-2" v-show="disabled"></i>Save</button>
 					<a class="ui button red" @click="hideModal">Close</a>
 				</div>
 			</div>
@@ -228,12 +228,14 @@
 <script>
 	import Devless from '@/utils/devless'
 	import Multiselect from 'vue-multiselect';
+	import moment from 'moment';
 
 	export default {
 		components: { Multiselect },
 		data() {
 			return {
 				menus: [],
+				newBtn: true,
 				editMode: false,
 				msg: undefined,
 				color: undefined,
@@ -337,19 +339,23 @@
 						}
 					}
 				}
+
+				this.valid_until = moment().day(4).add(1, 'week').format('YYYY-MM-DD');
 				
 				const res = await Devless.addData('mkoo', 'add_menu', {
 					valid_until: this.valid_until,
 					menu_meals: _meals
 				})
 				if(res.status_code === 609) {
-					this.menus.push({
-						id: res.payload.add_meal.payload.entry_id,
-						link: res.payload.link,
-						valid_until: this.valid_until
-					})
+					// this.menus.push({
+					// 	id: res.payload.add_meal.payload.entry_id,
+					// 	link: res.payload.link,
+					// 	valid_until: this.valid_until
+					// })
 					this.msg = res.message
 					this.color = 'positive'
+
+					this.fetchMenu();
 
 					this.hideModal();
 					return
@@ -372,6 +378,9 @@
 		},
 		mounted() {
 			this.fetchMenu()
+			if(moment().isoWeekday("Sunday").format('dddd') === moment().format('dddd')) {
+				this.newBtn = false;
+			}
 		}
 	}
 </script>

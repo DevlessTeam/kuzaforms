@@ -86,7 +86,7 @@
               </div>
             </div>
             <button v-show="!editMode" class="ui button" @click="addMeal" :disabled="disabled">
-                <i class="fa fa-spinner fa-spin mr-2" v-show="disabled"></i>Add Meal</button>
+                <i class="fa fa-spinner fa-spin mr-2" v-show="disabled"></i>Save</button>
               <a class="ui button red" @click="hideModal">
                 Close</a>
           </form>
