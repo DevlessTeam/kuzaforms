@@ -37,8 +37,8 @@
         </thead>
         <tbody>
           <tr v-for="(order, index) in orders">
+            <td>{{ getName(order) }}</td>
             <td>{{ index }}</td>
-            <td>{{ getEmail(order) }}</td>
             <td>
               <p><b>Lunch: </b>{{ getLunch(order, 'monday') }}</p>
               <p><b>Dinner: </b>{{ getLunch(order, 'monday') }}</p>
@@ -95,7 +95,7 @@
 
         if (resp.status_code === 625) {
           
-          let res = _.groupBy(resp.payload.results, 'name')
+          let res = _.groupBy(resp.payload.results, 'email')
           let resz = _.forEach(res, function (val, key) {
             res[key] = _.groupBy(res[key], 'day')
           })
@@ -126,9 +126,9 @@
         }
         alert('Error retrieving orders')
       },
-      getEmail(item){
+      getName(item){
         let obj = item[Object.keys(item)[0]]
-        return obj[Object.keys(obj)[0]][0].email
+        return obj[Object.keys(obj)[0]][0].name
       },
       getLunch(item, key) {
         return item[key].lunch[0].related.meal[0].name
