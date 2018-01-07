@@ -26,7 +26,7 @@
 				</thead>
 				<tbody>
 					<tr v-for="(menu, index) in menus">
-						<td>{{ menu.id }}</td>
+						<td>{{ index + 1 }}</td>
 						<td>{{ formatUrl(menu.link) }}</td>
 						<td>{{ menu.valid_until }}</td>
 						<td>

@@ -1,7 +1,11 @@
 <template>
   <div class="md p-4">
     <p class="text-2xl font-sans tracking-tight">Menu # {{ $route.params.id }}</p>
-    <p class="text-xl font-sans tracking-tight">Link: https://kuzaforms.com/mkoo?link_id={{ $route.params.details.link }}</p>
+    <!--<p class="text-xl font-sans tracking-tight">Link: https://kuzaforms.com/mkoo?link_id={{ $route.params.details.link }}</p>-->
+    <div class="mb-4">
+      <button class="ui button primary" v-if="!visible" @click="getSummary">Get Summary</button>
+      <button class="ui button red" v-else @click="visible = !visible">Close Summary</button>
+    </div>
     <div class="container">
       <!--<div class="ui compact menu">
         <a class="item">
@@ -18,6 +22,52 @@
         </a>
       </div>-->
     </div>
+    <div class="mb-4">
+    <div class="ui cards" v-if="visible">
+      <div class="card teal">
+        <div class="content">
+          <div class="header">Monday</div>
+          <div class="meta">Lunch: <b>{{ summary.monday.lunch }}</b></div>
+          <div class="meta">Dinner: <b>{{ summary.monday.dinner }}</b></div>
+        </div>
+      </div>
+      <div class="card blue">
+        <div class="content">
+          <div class="header">Tuesday</div>
+          <div class="meta">Lunch: <b>{{ summary.tuesday.lunch }}</b></div>
+          <div class="meta">Dinner: <b>{{ summary.tuesday.dinner }}</b></div>
+        </div>
+      </div>
+      <div class="card violet">
+        <div class="content">
+          <div class="header">Wednesday</div>
+          <div class="meta">Lunch: <b>{{ summary.wednesday.lunch }}</b></div>
+          <div class="meta">Dinner: <b>{{ summary.wednesday.dinner }}</b></div>
+        </div>
+      </div>
+      <div class="card yellow">
+        <div class="content">
+          <div class="header">Thursday</div>
+          <div class="meta">Lunch: <b>{{ summary.thursday.lunch }}</b></div>
+          <div class="meta">Dinner: <b>{{ summary.thursday.dinner }}</b></div>
+        </div>
+      </div>
+      <div class="card green">
+        <div class="content">
+          <div class="header">Friday</div>
+          <div class="meta">Lunch: <b>{{ summary.friday.lunch }}</b></div>
+          <div class="meta">Dinner: <b>{{ summary.friday.dinner }}</b></div>
+        </div>
+      </div>
+      <div class="card red">
+        <div class="content">
+          <div class="header">Saturday</div>
+          <div class="meta">Lunch: <b>{{ summary.saturday.lunch }}</b></div>
+          <div class="meta">Dinner: <b>{{ summary.saturday.dinner }}</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
 
     <div class="my-2 bg-white p-2 shadow-md rounded">
       <!-- <p class="text-xl">Customer Details</p> -->
@@ -40,28 +90,40 @@
             <td>{{ getName(order) }}</td>
             <td>{{ index }}</td>
             <td>
-              <p><b>Lunch: </b>{{ getLunch(order, 'monday') }}</p>
-              <p><b>Dinner: </b>{{ getLunch(order, 'monday') }}</p>
+              <p>
+                <b>Lunch: </b>{{ getLunch(order, 'monday') }}</p>
+              <p>
+                <b>Dinner: </b>{{ getLunch(order, 'monday') }}</p>
             </td>
             <td>
-              <p><b>Lunch: </b>{{ getLunch(order, 'tuesday') }}</p>
-              <p><b>Dinner: </b>{{ getLunch(order, 'tuesday') }}</p>
+              <p>
+                <b>Lunch: </b>{{ getLunch(order, 'tuesday') }}</p>
+              <p>
+                <b>Dinner: </b>{{ getLunch(order, 'tuesday') }}</p>
             </td>
             <td>
-              <p><b>Lunch: </b>{{ getLunch(order, 'wednesday') }}</p>
-              <p><b>Dinner: </b>{{ getLunch(order, 'wednesday') }}</p>
+              <p>
+                <b>Lunch: </b>{{ getLunch(order, 'wednesday') }}</p>
+              <p>
+                <b>Dinner: </b>{{ getLunch(order, 'wednesday') }}</p>
             </td>
             <td>
-              <p><b>Lunch: </b>{{ getLunch(order, 'thursday') }}</p>
-              <p><b>Dinner: </b>{{ getLunch(order, 'thursday') }}</p>
+              <p>
+                <b>Lunch: </b>{{ getLunch(order, 'thursday') }}</p>
+              <p>
+                <b>Dinner: </b>{{ getLunch(order, 'thursday') }}</p>
             </td>
             <td>
-              <p><b>Lunch: </b>{{ getLunch(order, 'friday') }}</p>
-              <p><b>Dinner: </b>{{ getLunch(order, 'friday') }}</p>
+              <p>
+                <b>Lunch: </b>{{ getLunch(order, 'friday') }}</p>
+              <p>
+                <b>Dinner: </b>{{ getLunch(order, 'friday') }}</p>
             </td>
             <td>
-              <p><b>Lunch: </b>{{ getLunch(order, 'saturday') }}</p>
-              <p><b>Dinner: </b>{{ getLunch(order, 'saturday') }}</p>
+              <p>
+                <b>Lunch: </b>{{ getLunch(order, 'saturday') }}</p>
+              <p>
+                <b>Dinner: </b>{{ getLunch(order, 'saturday') }}</p>
             </td>
             <!--<td>
               <button class="button ui red">
@@ -84,7 +146,9 @@
 
   export default {
     data: () => ({
-      orders: []
+      orders: [],
+      summary: {},
+      visible: false
     }),
     methods: {
       async fetchOrders() {
@@ -94,7 +158,7 @@
         })
 
         if (resp.status_code === 625) {
-          
+
           let res = _.groupBy(resp.payload.results, 'email')
           let resz = _.forEach(res, function (val, key) {
             res[key] = _.groupBy(res[key], 'day')
@@ -119,14 +183,23 @@
             });
 
             table.buttons().container()
-              .appendTo( $('div.eight.column:eq(0)', table.table().container()) );
+              .appendTo($('div.eight.column:eq(0)', table.table().container()));
           })
 
           return
         }
         alert('Error retrieving orders')
       },
-      getName(item){
+      async getSummary() {
+        const res = await Devless.addData('mkoo', 'stats', {
+          "menu_id": this.$route.params.id
+        })
+        if(res.status_code === 1000) {
+          this.summary = res.payload
+          this.visible = !this.visible
+        }
+      },
+      getName(item) {
         let obj = item[Object.keys(item)[0]]
         return obj[Object.keys(obj)[0]][0].name
       },
@@ -136,7 +209,7 @@
       getDinner(item, key) {
         return item[key].dinner[0].related.meal[0].name
       },
-      async deleteOrder (id) {
+      async deleteOrder(id) {
         const res = await Devless.deleteData('mkoo', 'order')
       }
     },
