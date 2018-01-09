@@ -13,14 +13,14 @@
             <i class="fa fa-list mr-2"></i>Menus
           </a>
         </router-link>
-        <router-link class="p-2 rounded my-4" active-class="bg-white border font-semibold shadow-lg" :to="{name: 'Items'}" tag="li">
-          <a class='text-grey-darker no-underline'>
-            <i class="fa fa-cutlery mr-2"></i> Ingredients</a>
-        </router-link>
         <router-link tag='li' :to="{name: 'Meal'}" active-class="bg-white border font-semibold shadow-lg" class="my-4 p-2 rounded">
           <a class='new text-grey-darker no-underline'>
             <i class="fa fa-coffee mr-2"></i> Meals
           </a>
+        </router-link>
+        <router-link class="p-2 rounded my-4" active-class="bg-white border font-semibold shadow-lg" :to="{name: 'Items'}" tag="li">
+          <a class='text-grey-darker no-underline'>
+            <i class="fa fa-cutlery mr-2"></i> Ingredients</a>
         </router-link>
         <router-link tag='li' :to="{name: 'Settings'}" active-class="bg-white border font-semibold shadow-lg" class="my-4 p-2 rounded">
           <a class='new text-grey-darker no-underline'>

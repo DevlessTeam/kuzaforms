@@ -54,6 +54,8 @@
             </div>
             <button v-show="!editMode" class="ui button" @click="addItem" :disabled="disabled"><i class="fa fa-spinner fa-spin mr-2" v-show="loading"></i>Save</button>
             <a v-show="editMode" class="ui button" @click="updateItem" :disabled="disabled"><i class="fa fa-spinner fa-spin mr-2" v-show="loading"></i>Save</a>
+             <a class="ui button red" @click="hideModal" onclick="$('.ui.modal').modal('hide')">
+                Close</a>
           </form>
 
         </div>
@@ -126,11 +128,12 @@
         this.name = ''
         this.description = ''
         $('#items')
+          .modal('setting', 'closable', false)
           .modal('show')
           ;
       },
       hideModal() {
-        $('#items')
+        $('.ui.modal')
           .modal('hide')
           ;
       },

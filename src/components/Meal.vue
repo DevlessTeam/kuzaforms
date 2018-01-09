@@ -26,7 +26,7 @@
         </thead>
         <tbody>
           <tr v-for="(meal, index) in meals">
-            <td>{{ meal.id }}</td>
+            <td>{{ index + 1 }}</td>
             <td>{{ meal.name }}</td>
             <td>{{ meal.description }}</td>
             <td>
@@ -59,7 +59,7 @@
                   Description
                 </label>
                 <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3"
-                 type="text" placeholder="Description of Meal" v-model="description" required>
+                 type="text" placeholder="Description of Meal" v-model="description">
               </div>
             </div>
             <div class="ui divider"></div>
@@ -87,7 +87,7 @@
             </div>
             <button v-show="!editMode" class="ui button" @click="addMeal" :disabled="disabled">
                 <i class="fa fa-spinner fa-spin mr-2" v-show="disabled"></i>Save</button>
-              <a class="ui button red" @click="hideModal">
+              <a class="ui button red" @click="hideModal" onclick="$('.ui.modal').modal('hide')">
                 Close</a>
           </form>
         </div>

@@ -93,37 +93,37 @@
               <p>
                 <b>Lunch: </b>{{ getLunch(order, 'monday') }}</p>
               <p>
-                <b>Dinner: </b>{{ getLunch(order, 'monday') }}</p>
+                <b>Dinner: </b>{{ getDinner(order, 'monday') }}</p>
             </td>
             <td>
               <p>
                 <b>Lunch: </b>{{ getLunch(order, 'tuesday') }}</p>
               <p>
-                <b>Dinner: </b>{{ getLunch(order, 'tuesday') }}</p>
+                <b>Dinner: </b>{{ getDinner(order, 'tuesday') }}</p>
             </td>
             <td>
               <p>
                 <b>Lunch: </b>{{ getLunch(order, 'wednesday') }}</p>
               <p>
-                <b>Dinner: </b>{{ getLunch(order, 'wednesday') }}</p>
+                <b>Dinner: </b>{{ getDinner(order, 'wednesday') }}</p>
             </td>
             <td>
               <p>
                 <b>Lunch: </b>{{ getLunch(order, 'thursday') }}</p>
               <p>
-                <b>Dinner: </b>{{ getLunch(order, 'thursday') }}</p>
+                <b>Dinner: </b>{{ getDinner(order, 'thursday') }}</p>
             </td>
             <td>
               <p>
                 <b>Lunch: </b>{{ getLunch(order, 'friday') }}</p>
               <p>
-                <b>Dinner: </b>{{ getLunch(order, 'friday') }}</p>
+                <b>Dinner: </b>{{ getDinner(order, 'friday') }}</p>
             </td>
             <td>
               <p>
                 <b>Lunch: </b>{{ getLunch(order, 'saturday') }}</p>
               <p>
-                <b>Dinner: </b>{{ getLunch(order, 'saturday') }}</p>
+                <b>Dinner: </b>{{ getDinner(order, 'saturday') }}</p>
             </td>
             <!--<td>
               <button class="button ui red">
@@ -156,6 +156,7 @@
           where: ['mkoo_menu_id,' + this.$route.params.id],
           related: 'meal'
         })
+
 
         if (resp.status_code === 625) {
 
@@ -204,10 +205,18 @@
         return obj[Object.keys(obj)[0]][0].name
       },
       getLunch(item, key) {
-        return item[key].lunch[0].related.meal[0].name
+        if(item.hasOwnProperty(key) && item[key].lunch !== undefined) {
+          return item[key].lunch[0].related.meal[0].name
+        }
+
+        return 'unavailable'
       },
       getDinner(item, key) {
-        return item[key].dinner[0].related.meal[0].name
+        if(item.hasOwnProperty(key) && item[key].dinner !== undefined) {
+          return item[key].dinner[0].related.meal[0].name
+        }
+
+        return 'unavailable'
       },
       async deleteOrder(id) {
         const res = await Devless.deleteData('mkoo', 'order')
