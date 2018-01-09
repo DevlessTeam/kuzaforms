@@ -77,6 +77,7 @@
                     track-by="name"
                     label="name"
                     placeholder="Select an Ingredient"
+                    :disabled="editMode"
                     >
                   </multiselect>
                 </div>
@@ -87,6 +88,8 @@
             </div>
             <button v-show="!editMode" class="ui button" @click="addMeal" :disabled="disabled">
                 <i class="fa fa-spinner fa-spin mr-2" v-show="disabled"></i>Save</button>
+            <button v-show="editMode" class="ui button" @click="updateMeal" :disabled="disabled">
+                <i class="fa fa-spinner fa-spin mr-2" v-show="disabled"></i>Update</button>
               <a class="ui button red" @click="hideModal" onclick="$('.ui.modal').modal('hide')">
                 Close</a>
           </form>
@@ -107,6 +110,7 @@
     components: { Multiselect },
     data() {
       return {
+        id: '',
         meals: [],
         msg: undefined,
         color: undefined,
@@ -117,11 +121,12 @@
         editMode: false,
         disabled: true,
         value: [],
-        options: []
+        options: [],
       }
     },
     methods: {
       showModal() {
+        this.editMode = false
         this.value = []
         this.name = ''
         this.description = ''
@@ -196,11 +201,30 @@
         }
         
       },
+      async updateMeal() {
+        const res = await Devless.updateData('mkoo', 'meal', 'id', this.id, {
+          name: this.name,
+          description: this.description
+        })
+
+        if(res.status_code === 619) {
+          this.msg = 'Record updated successfully'
+          this.color = 'positive'
+          this.hideModal();
+          
+          return
+        }
+        this.hideModal();
+        
+        alert(res.message)
+      },
       async showMeal(el) {
         this.showModal()
         this.loading = true
         this.name = el.name
+        this.editMode = true
         this.description = el.description
+        this.id = el.id
         const res = await Devless.queryData('mkoo', 'meal_items', {
           where: ['mkoo_meal_id,'+el.id],
           related: 'item'
