@@ -163,32 +163,6 @@
 						<div class="flex flex-wrap -mx-3 mb-6">
 							<div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
 								<label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-first-name">
-									saturday (Lunch)
-								</label>
-								<div v-if="options.length !== 0">
-									<multiselect v-model="meals.saturday.lunch" :options="options" :multiple="true" track-by="name" label="name" placeholder="Add meal">
-									</multiselect>
-								</div>
-								<div v-else>
-									<i class="fa fa-spinner fa-spin"></i> Loading
-								</div>
-							</div>
-							<div class="w-full md:w-1/2 px-3">
-								<label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-last-name">
-									saturday (Dinner)
-								</label>
-								<div v-if="options.length !== 0">
-									<multiselect v-model="meals.saturday.dinner" :options="options" :multiple="true" track-by="name" label="name" placeholder="Add meal">
-									</multiselect>
-								</div>
-								<div v-else>
-									<i class="fa fa-spinner fa-spin"></i> Loading
-								</div>
-							</div>
-						</div>
-						<div class="flex flex-wrap -mx-3 mb-6">
-							<div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-								<label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-first-name">
 									friday (Lunch)
 								</label>
 								<div v-if="options.length !== 0">
@@ -212,6 +186,33 @@
 								</div>
 							</div>
 						</div>
+						<div class="flex flex-wrap -mx-3 mb-6">
+							<div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+								<label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-first-name">
+									saturday (Lunch)
+								</label>
+								<div v-if="options.length !== 0">
+									<multiselect v-model="meals.saturday.lunch" :options="options" :multiple="true" track-by="name" label="name" placeholder="Add meal">
+									</multiselect>
+								</div>
+								<div v-else>
+									<i class="fa fa-spinner fa-spin"></i> Loading
+								</div>
+							</div>
+							<div class="w-full md:w-1/2 px-3">
+								<label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-last-name">
+									saturday (Dinner)
+								</label>
+								<div v-if="options.length !== 0">
+									<multiselect v-model="meals.saturday.dinner" :options="options" :multiple="true" track-by="name" label="name" placeholder="Add meal">
+									</multiselect>
+								</div>
+								<div v-else>
+									<i class="fa fa-spinner fa-spin"></i> Loading
+								</div>
+							</div>
+						</div>
+						
 					</div>
 					<button v-show="!editMode" class="ui button" @click="addMenu" :disabled="disabled">
 						<i class="fa fa-spinner fa-spin mr-2" v-show="disabled"></i>Save</button>
