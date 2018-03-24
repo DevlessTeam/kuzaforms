@@ -5,7 +5,7 @@
       <div class="ui center aligned grid">
         <div class="column">
           <h2 class="ui image header">
-            <img src="../assets/logo_bx.png" class="ui image">
+            <img src="static/logo.jpg" class="ui image">
             <div class="content">
               <p class="text-grey-darker">Log-in to your account</p>
             </div>
@@ -45,11 +45,11 @@
             </div>
             <div class="ui error message"></div>
           </form>
-          <div class="ui message">
-            <span class="text-grey">New to us?</span>
+          <!-- <div class="ui message"> -->
+            <!-- <span class="text-grey">New to us?</span> -->
             <!--<router-link :to="{name: 'Register'}" class="text-black font-semibold">Sign Up</router-link>-->
-            <a href="http://kuzaforms.com" target="_blank" class="text-black font-semibold">Sign Up</a>
-          </div>
+            <!-- <a href="http://kuzaforms.com" target="_blank" class="text-black font-semibold">Sign Up</a> -->
+          <!-- </div> -->
         </div>
       </div>
     </div>
@@ -58,7 +58,8 @@
 
 <script>
   import Devless from '@/utils/devless'
-  import store from '@/store'
+  // import store from '@/store'
+  import Cookies from 'js-cookie';
 
   export default {
     data: () => ({
@@ -86,6 +87,7 @@
         if (response.status_code === 637) {
           if (response.payload.result) {
             localStorage.setItem('token', response.payload.result.token)
+            Cookies.set('token', response.payload.result.token);
             // Devless.setToken(response.payload.result.token)
             this.$store.dispatch('login')
             return true

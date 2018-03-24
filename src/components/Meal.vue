@@ -15,7 +15,24 @@
       </div>
     </div>
     <div class="bg-white p-4 shadow-md rounded">
-      <table class="ui celled table" id="datatable">
+      <div class="flex justify-center" v-if="isActive">
+        <div class="ui active inline loader"></div>
+      </div>
+      <vue-good-table :columns="columns" :rows="meals" :globalSearch="true" :lineNumbers="true" :paginate="true" v-else>
+        <template slot="table-row" slot-scope="props">
+          <td>{{ props.row.name }}</td>
+          <td>{{ props.row.description }}</td>
+          <td>
+            <a class="bg-grey p-2 rounded hover:bg-black hover:text-white" @click="showMeal(props.row)">
+              <i class="fa fa-eye"></i>
+            </a>
+            <a class="bg-red-darker p-2 rounded text-white hover:bg-red hover:text-white" @click="deleteItem(props.row.originalIndex, props.row.id)">
+              <i class="fa fa-remove"></i>
+            </a>
+          </td>
+        </template>
+      </vue-good-table>
+      <!-- <table class="ui celled table" id="datatable">
         <thead>
           <tr>
             <th>#</th>
@@ -25,7 +42,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(meal, index) in meals">
+          <tr v-for="(meal, index) in meals" :key="index">
             <td>{{ index + 1 }}</td>
             <td>{{ meal.name }}</td>
             <td>{{ meal.description }}</td>
@@ -39,7 +56,7 @@
             </td>
           </tr>
         </tbody>
-      </table>
+      </table> -->
       <div class="ui small modal" id="meal">
         <div class="header">Meal</div>
         <div class="content">
@@ -95,9 +112,6 @@
           </form>
         </div>
       </div>
-      <div class="flex justify-center" v-show="isActive">
-        <div class="ui active inline loader"></div>
-      </div>
     </div>
   </div>
 </template>
@@ -110,6 +124,23 @@
     components: { Multiselect },
     data() {
       return {
+        columns: [
+          {
+						label: 'Name',
+						field: 'name',
+						filterable: true,
+					},
+					{
+						label: 'Description',
+						field: 'description',
+						filterable: true,
+					},
+					{
+						label: 'Actions',
+						field: 'action',
+						filterable: false,
+					},
+        ],
         id: '',
         meals: [],
         msg: undefined,

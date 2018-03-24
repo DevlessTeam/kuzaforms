@@ -1,67 +1,68 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import Main from '@/components/Main'
-import Settings from '@/components/Settings'
-import Menu from '@/components/Menu'
-import Items from '@/components/Items'
-import MenuView from '@/components/MenuView'
-import Meal from '@/components/Meal'
-import Login from '@/components/Login'
-import Register from '@/components/Register'
-import NotFoundComponent from '@/components/NotFoundComponent'
+import Vue from "vue";
+import Router from "vue-router";
+import Main from "@/components/Main";
+import Settings from "@/components/Settings";
+import Menu from "@/components/Menu";
+import Items from "@/components/Items";
+import MenuView from "@/components/MenuView";
+import Meal from "@/components/Meal";
+import Login from "@/components/Login";
+import Register from "@/components/Register";
+import Feedbacks from "@/components/Feedbacks";
+import NotFoundComponent from "@/components/NotFoundComponent";
 
-Vue.use(Router)
+Vue.use(Router);
 
 const router = new Router({
-  mode: 'hash',
+  mode: "hash",
   routes: [
     {
-      path: '/',
+      path: "/",
       component: Main,
       children: [
         {
-          path: '/',
-          name: 'Menu',
+          path: "/",
+          name: "Menu",
           component: Menu
         },
         {
-          path: '/settings',
-          name: 'Settings',
+          path: "/settings",
+          name: "Settings",
           component: Settings
         },
         {
-          path: '/items',
-          name: 'Items',
+          path: "/items",
+          name: "Items",
           component: Items
         },
         {
-          path: '/menu/:id/',
-          name: 'MenuView',
+          path: "/menu/:id/",
+          name: "MenuView",
           component: MenuView
         },
         {
-          path: '/meals',
-          name: 'Meal',
+          path: "/meals",
+          name: "Meal",
           component: Meal
+        },
+        {
+          path: "feedbacks",
+          name: "Feedbacks",
+          component: Feedbacks
         }
       ],
       meta: { requiresAuth: true }
     },
     {
-      path: '/login',
-      name: 'Login',
+      path: "/login",
+      name: "Login",
       component: Login
     },
     {
-      path: '/register',
-      name: 'Register',
-      component: Register
-    },
-    {
-      path: '*',
+      path: "*",
       component: NotFoundComponent
-    },
+    }
   ]
-})
+});
 
-export default router
+export default router;

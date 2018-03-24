@@ -15,32 +15,24 @@
 			</div>
 		</div>
 		<div class="my-2 bg-white p-2 shadow-md rounded">
-			<table class="ui celled table" id="datatable">
-				<thead>
-					<tr>
-						<th>#</th>
-						<th>Sharable Link</th>
-						<th>Valid Until</th>
-						<th>Options</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr v-for="(menu, index) in menus">
-						<td>{{ index + 1 }}</td>
-						<td>{{ formatUrl(menu.link) }}</td>
-						<td>{{ menu.valid_until }}</td>
-						<td>
-							<button class="ui blue button" v-clipboard:copy="formatUrl(menu.link)" v-clipboard:success="onCopy">Copy</button>
-							<router-link class="ui positive button" tag="button" :to="{name: 'MenuView', params: { id: menu.id, details: menu }}">
+			 <div class="flex justify-center" v-if="menus === undefined">
+				<div class="ui active inline loader"></div>
+			</div>
+			 <vue-good-table :columns="columns" :rows="menus" :globalSearch="true" :lineNumbers="true" :paginate="true" v-else >
+				 <template slot="table-row" slot-scope="props">
+					 <td>{{ formatUrl(props.row.link) }}</td>
+					 <td>{{ props.row.valid_until }}</td>
+					 <td>
+						 <button class="ui blue button" v-clipboard:copy="formatUrl(props.row.link)" v-clipboard:success="onCopy">Copy</button>
+							<router-link class="ui positive button" tag="button" :to="{name: 'MenuView', params: { id: props.row.id, details: props.row }}">
 									<i class="fa fa-table"></i>
 							</router-link>
-							<button class="ui red button" @click="deleteMenu(index, menu.id)">
+							<button class="ui red button" @click="deleteMenu(index, props.row.id)">
 								<i class="fa fa-remove"></i>
 							</button>
-						</td>
-					</tr>
-				</tbody>
-			</table>
+					 </td>
+				 </template>
+			 </vue-good-table>
 			<div class="ui small modal" id="menu">
 				<div class="header">Meals</div>
 				<div class="content">
@@ -219,9 +211,6 @@
 					<a class="ui button red" @click="hideModal">Close</a>
 				</div>
 			</div>
-			<div class="flex justify-center" v-show="menus.length === 0">
-				<div class="ui active inline loader"></div>
-			</div>
 		</div>
 	</div>
 </template>
@@ -235,7 +224,24 @@
 		components: { Multiselect },
 		data() {
 			return {
-				menus: [],
+				columns: [
+					{
+						label: 'Shareable Link',
+						field: 'link',
+						filterable: true,
+					},
+					{
+						label: 'Valid Until',
+						field: 'valid_until',
+						filterable: true,
+					},
+					{
+						label: 'Actions',
+						field: 'actions',
+						filterable: false,
+					},
+				],
+				menus: undefined,
 				newBtn: true,
 				editMode: false,
 				msg: undefined,
@@ -286,7 +292,7 @@
 					;
 			},
 			formatUrl (link) {
-				return `https://kuzaforms.com/mkoo?link_id=${link}`
+				return `https://kuzapay.com/mkoo?link_id=${link}`
 			},
 			onCopy () {
 				this.msg = 'Copied to clipboard'
@@ -301,11 +307,11 @@
 				const res = await Devless.queryData('mkoo', 'menu')
 				if (res.status_code === 625) {
 					this.menus = res.payload.results;
-					this.$nextTick(() => {
-						$('#datatable').DataTable({
-							"order": [[0, "desc"]]
-						})
-					})
+					// this.$nextTick(() => {
+					// 	$('#datatable').DataTable({
+					// 		"order": [[0, "desc"]]
+					// 	})
+					// })
 
 					this.fetchMeals()
 					return

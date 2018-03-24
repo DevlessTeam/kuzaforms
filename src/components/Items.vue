@@ -15,7 +15,7 @@
       </div>
     </div>
     <div class="my-2 bg-white p-2 shadow-md rounded">
-      <table class="ui celled table" id="datatable">
+      <!-- <table class="ui celled table" id="datatable">
         <thead>
           <tr>
             <th>#</th>
@@ -25,8 +25,8 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(item, index) in items">
-            <td>{{ item.id }}</td>
+          <tr v-for="(item, index) in items" :key="index">
+            <td>{{ index + 1 }}</td>
             <td>{{ item.name }}</td>
             <td>{{ item.description }}</td>
             <td>
@@ -39,7 +39,24 @@
             </td>
           </tr>
         </tbody>
-      </table>
+      </table> -->
+      <div class="flex justify-center" v-if="isActive">
+        <div class="ui active inline loader"></div>
+      </div>
+      <vue-good-table :columns="columns" :rows="items" :globalSearch="true" :lineNumbers="true" :paginate="true" v-else>
+        <template slot="table-row" slot-scope="props">
+          <td>{{ props.row.name }}</td>
+          <td>{{ props.row.description }}</td>
+          <td>
+            <a class="bg-grey p-2 rounded hover:bg-black hover:text-white" @click="editModal(props.row, props.row.originalIndex)">
+              <i class="fa fa-edit"></i>
+            </a>
+            <a class="bg-red-darker p-2 rounded text-white hover:bg-red hover:text-white" @click="deleteItem(props.row.originalIndex, props.row.id)">
+              <i class="fa fa-remove"></i>
+            </a>
+          </td>
+        </template>
+      </vue-good-table>
       <div class="ui modal" id="items">
         <div class="header">Ingredient</div>
         <div class="content">
@@ -60,9 +77,9 @@
 
         </div>
       </div>
-      <div class="flex justify-center" v-show="isActive">
+      <!-- <div class="flex justify-center" v-show="isActive">
         <div class="ui active inline loader"></div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -73,6 +90,23 @@
   export default {
     data() {
       return {
+        columns: [
+          {
+						label: 'Name',
+						field: 'name',
+						filterable: true,
+					},
+					{
+						label: 'Description',
+						field: 'description',
+						filterable: true,
+					},
+					{
+						label: 'Actions',
+						field: 'action',
+						filterable: false,
+					},
+        ],
         items: [],
         id: {},
         msg: undefined,
@@ -91,16 +125,11 @@
         this.items = res.payload.results;
         if (res.status_code === 625) {
           this.$nextTick(() => {
-            if (res.payload.results.length !== 0) {
+            if (res.payload.results) {
               this.isActive = !this.isActive
-              $('#datatable').DataTable({
-                "order": [[0, "asc"]]
-              })
-            } else {
-              this.isActive = !this.isActive
-              $('#datatable').DataTable({
-                "order": [[0, "asc"]]
-              })
+              // window.datatable = $('#datatable').DataTable({
+              //   "order": [[0, "asc"]]
+              // })
             }
           })
           return
@@ -152,8 +181,10 @@
           name: this.name,
           description: this.description
         })
-        console.log(res)
         if(res.status_code === 609) {
+          // this.$nextTick(() => {
+
+          // })
           this.items.push({
             id: res.payload.entry_id,
             name: this.name,

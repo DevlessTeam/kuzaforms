@@ -27,43 +27,43 @@
       <div class="card teal">
         <div class="content">
           <div class="header">Monday</div>
-          <div class="meta">Lunch: <b>{{ summary.monday.lunch }}</b></div>
-          <div class="meta">Dinner: <b>{{ summary.monday.dinner }}</b></div>
+          <div class="meta" v-if="summary.monday">Lunch: <b>{{ summary.monday.lunch }}</b></div>
+          <div class="meta" v-if="summary.monday">Dinner: <b>{{ summary.monday.dinner }}</b></div>
         </div>
       </div>
       <div class="card blue">
         <div class="content">
           <div class="header">Tuesday</div>
-          <div class="meta">Lunch: <b>{{ summary.tuesday.lunch }}</b></div>
-          <div class="meta">Dinner: <b>{{ summary.tuesday.dinner }}</b></div>
+          <div class="meta" v-if="summary.tuesday">Lunch: <b>{{ summary.tuesday.lunch }}</b></div>
+          <div class="meta" v-if="summary.tuesday">Dinner: <b>{{ summary.tuesday.dinner }}</b></div>
         </div>
       </div>
       <div class="card violet">
         <div class="content">
           <div class="header">Wednesday</div>
-          <div class="meta">Lunch: <b>{{ summary.wednesday.lunch }}</b></div>
-          <div class="meta">Dinner: <b>{{ summary.wednesday.dinner }}</b></div>
+          <div class="meta" v-if="summary.wednesday">Lunch: <b>{{ summary.wednesday.lunch }}</b></div>
+          <div class="meta" v-if="summary.wednesday">Dinner: <b>{{ summary.wednesday.dinner }}</b></div>
         </div>
       </div>
       <div class="card yellow">
         <div class="content">
           <div class="header">Thursday</div>
-          <div class="meta">Lunch: <b>{{ summary.thursday.lunch }}</b></div>
-          <div class="meta">Dinner: <b>{{ summary.thursday.dinner }}</b></div>
+          <div class="meta"  v-if="summary.thursday">Lunch: <b>{{ summary.thursday.lunch }}</b></div>
+          <div class="meta" v-if="summary.thursday">Dinner: <b>{{ summary.thursday.dinner }}</b></div>
         </div>
       </div>
       <div class="card green">
         <div class="content">
           <div class="header">Friday</div>
-          <div class="meta">Lunch: <b>{{ summary.friday.lunch }}</b></div>
-          <div class="meta">Dinner: <b>{{ summary.friday.dinner }}</b></div>
+          <div class="meta" v-if="summary.friday">Lunch: <b>{{ summary.friday.lunch }}</b></div>
+          <div class="meta"  v-if="summary.friday">Dinner: <b>{{ summary.friday.dinner }}</b></div>
         </div>
       </div>
       <div class="card red">
         <div class="content">
           <div class="header">Saturday</div>
-          <div class="meta">Lunch: <b>{{ summary.saturday.lunch }}</b></div>
-          <div class="meta">Dinner: <b>{{ summary.saturday.dinner }}</b></div>
+          <div class="meta" v-if="summary.saturday">Lunch: <b>{{ summary.saturday.lunch }}</b></div>
+          <div class="meta" v-if="summary.saturday">Dinner: <b>{{ summary.saturday.dinner }}</b></div>
         </div>
       </div>
     </div>
@@ -86,7 +86,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(order, index) in orders">
+          <tr v-for="(order, index) in orders" :key="index">
             <td>{{ getName(order) }}</td>
             <td>{{ index }}</td>
             <td>
