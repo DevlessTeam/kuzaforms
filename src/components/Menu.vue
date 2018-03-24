@@ -413,11 +413,11 @@
         }
 			},
 			async viewMenu (token) {
-				$('#view-menu').modal('show')
 				const res = await Devless.addData('mkoo', 'meal_query', { token: token, email: '' })
           if (res.status_code === 625) {
 						this.menuMeals = _.groupBy(res.payload, 'day');
 						delete this.menuMeals['undefined']
+    				$('#view-menu').modal('show')
 						return;
 					}
 					alert('An error occurred')
