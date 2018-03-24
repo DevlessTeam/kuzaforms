@@ -16,6 +16,8 @@
 
 <script>
 import Devless from '../utils/devless'
+import _ from 'lodash'
+
 export default {
   data: () => ({
     columns: [
@@ -46,7 +48,7 @@ export default {
     async fetchFeedbacks() {
       const res = await Devless.queryData('mkoo', 'feedback')
       if (res.status_code === 625) {
-        this.feedbacks = res.payload.results
+        this.feedbacks = _.reverse(res.payload.results)
         return
       }
       alert('Error retrieving feedbacks');
