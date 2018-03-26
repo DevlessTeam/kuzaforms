@@ -28,7 +28,7 @@
             <router-link class="ui positive button" tag="button" :to="{name: 'MenuView', params: { id: props.row.id, details: props.row }}">
               <i class="fa fa-table"></i>
             </router-link>
-            <button class="ui red button" @click="deleteMenu(index, props.row.id)">
+            <button class="ui red button" @click="deleteMenu(props.row.originalIndex, props.row.id)">
               <i class="fa fa-remove"></i>
             </button>
           </td>
@@ -208,10 +208,11 @@
 
           </div>
           <button v-show="!editMode" class="ui button" @click="addMenu" :disabled="disabled">
-            <i class="fa fa-spinner fa-spin mr-2" v-show="disabled"></i>Save</button>
+            <i class="fa fa-spinner fa-spin mr-2" v-show="disabled"></i><span v-show="!disabled">Save</span><span v-show="disabled">Saving</span></button>
           <a class="ui button red" @click="hideModal">Close</a>
         </div>
       </div>
+    </div>
       <div class="ui small modal" id="view-menu">
         <div class="header">Menu Details</div>
         <div class="content">
@@ -248,7 +249,6 @@
           </div>
         </div>
       </div>
-    </div>
   </div>
 </template>
 
@@ -357,10 +357,10 @@
 
           return;
         }
-        console.log(this.options);
         alert("Error occurred retrieving meals");
       },
       async addMenu() {
+        this.disabled = !this.disabled
         let _meals = [];
         for (var key in this.meals) {
           if (this.meals.hasOwnProperty(key)) {
@@ -381,13 +381,14 @@
 
         this.valid_until = moment()
           .day(4)
-          .add(1, "week")
+          // .add(1, "week")
           .format("YYYY-MM-DD");
 
         const res = await Devless.addData("mkoo", "add_menu", {
           valid_until: this.valid_until,
           menu_meals: _meals
         });
+        this.disabled = !this.disabled
         if (res.status_code === 609) {
           this.msg = res.message;
           this.color = "positive";
@@ -404,6 +405,7 @@
           const res = await Devless.deleteData("mkoo", "menu", "id", id);
 
           if (res.status_code === 636) {
+            this.menus.splice(index, 1)
             this.msg = "Record deleted successfully";
             this.color = "red";
 
@@ -417,7 +419,11 @@
           if (res.status_code === 625) {
 						this.menuMeals = _.groupBy(res.payload, 'day');
 						delete this.menuMeals['undefined']
-    				$('#view-menu').modal('show')
+    				$('#view-menu')
+              .modal('show')
+            this.$nextTick(() => {
+              $('#view-menu').modal('refresh')
+            })
 						return;
 					}
 					alert('An error occurred')

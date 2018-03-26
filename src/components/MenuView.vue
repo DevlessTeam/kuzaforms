@@ -3,7 +3,7 @@
     <p class="text-2xl font-sans tracking-tight">Menu # {{ $route.params.id }}</p>
     <!--<p class="text-xl font-sans tracking-tight">Link: https://kuzaforms.com/mkoo?link_id={{ $route.params.details.link }}</p>-->
     <div class="mb-4">
-      <button class="ui button primary" v-if="!visible" @click="getSummary">Get Summary</button>
+      <button class="ui button" :class="{'primary': !calc, 'teal': calc}" v-if="!visible" @click="getSummary"><span v-if="!calc">Get Summary</span> <span v-else>Calculating...</span></button>
       <button class="ui button red" v-else @click="visible = !visible">Close Summary</button>
     </div>
     <div class="container">
@@ -148,6 +148,7 @@
     data: () => ({
       orders: [],
       summary: {},
+      calc: false,
       visible: false
     }),
     methods: {
@@ -192,9 +193,11 @@
         alert('Error retrieving orders')
       },
       async getSummary() {
+        this.calc = !this.calc
         const res = await Devless.addData('mkoo', 'stats', {
           "menu_id": this.$route.params.id
         })
+        this.calc = !this.calc
         if(res.status_code === 1000) {
           this.summary = res.payload
           this.visible = !this.visible
