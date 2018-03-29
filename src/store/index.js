@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import Devless from "@/utils/devless";
+import Cookies from "js-cookie";
 
 Vue.use(Vuex);
 
@@ -14,19 +15,20 @@ const store = new Vuex.Store({
     }
   },
   actions: {
-    login (context, payload) {
-      context.commit('changeAuthState')
+    login(context, payload) {
+      context.commit("changeAuthState");
     },
-    register (context, payload) {
-      context.commit('changeAuthState')
+    register(context, payload) {
+      context.commit("changeAuthState");
     },
     async logout(context, payload) {
-      const res = await Devless.call('devless', 'logout')
+      Devless.setToken(Cookies.get("token"));
+      const res = await Devless.call("devless", "logout");
       if (res.payload.result) {
-        context.commit('changeAuthState')
-        return true
+        context.commit("changeAuthState");
+        return true;
       }
-      return false
+      return false;
     }
   }
 });
