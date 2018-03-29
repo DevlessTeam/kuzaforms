@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import Devless from "@/utils/devless";
 
 Vue.use(Vuex);
 
@@ -19,9 +20,13 @@ const store = new Vuex.Store({
     register (context, payload) {
       context.commit('changeAuthState')
     },
-    logout(context, payload) {
-      context.commit('changeAuthState')
-      return true
+    async logout(context, payload) {
+      const res = await Devless.call('devless', 'logout')
+      if (res.payload.result) {
+        context.commit('changeAuthState')
+        return true
+      }
+      return false
     }
   }
 });

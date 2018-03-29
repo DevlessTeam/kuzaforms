@@ -26,7 +26,10 @@
           </a>-->
         </div>
         <div>
-          <a class="inline-block text-sm px-4 py-2 text-black bg-white leading-none border rounded border-black hover:border-transparent hover:text-black hover:bg-blue mt-4 lg:mt-0" @click="logout">Logout</a>
+          <a class="inline-block text-sm px-4 py-2 text-black bg-white leading-none border rounded border-black hover:border-transparent hover:text-black hover:bg-blue mt-4 lg:mt-0" @click="logout">
+            <span v-if="!loading">Logout</span>
+            <span v-else>logging out</span>
+            </a>
         </div>
       </div>
     </nav>
@@ -40,12 +43,17 @@
     components: {
       Logo
     },
+    data: () => ({
+      loading: false
+    }),
     methods: {
       async logout () {
-       const result = await this.$store.dispatch('logout')
-       if( result)
-        this.$router.push('/login')
-      }
+        this.loading = !this.loading
+        const result = await this.$store.dispatch('logout')
+        this.loading = !this.loading
+        if(result)
+          this.$router.push('/login')
+        }
     }
   }
 </script>

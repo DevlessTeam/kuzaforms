@@ -290,28 +290,88 @@
         disabled: false,
         meals: {
           monday: {
-            dinner: [],
-            lunch: []
+            dinner: [{
+              description:"",
+              devless_user_id:1,
+              id:96,
+              name:"Am Not Eating"
+            }],
+            lunch: [{
+              description:"",
+              devless_user_id:1,
+              id:96,
+              name:"Am Not Eating"
+            }]
           },
           tuesday: {
-            dinner: [],
-            lunch: []
+            dinner: [{
+              description:"",
+              devless_user_id:1,
+              id:96,
+              name:"Am Not Eating"
+            }],
+            lunch: [{
+              description:"",
+              devless_user_id:1,
+              id:96,
+              name:"Am Not Eating"
+            }]
           },
           wednesday: {
-            dinner: [],
-            lunch: []
+            dinner: [{
+              description:"",
+              devless_user_id:1,
+              id:96,
+              name:"Am Not Eating"
+            }],
+            lunch: [{
+              description:"",
+              devless_user_id:1,
+              id:96,
+              name:"Am Not Eating"
+            }]
           },
           thursday: {
-            dinner: [],
-            lunch: []
+            dinner: [{
+              description:"",
+              devless_user_id:1,
+              id:96,
+              name:"Am Not Eating"
+            }],
+            lunch: [{
+              description:"",
+              devless_user_id:1,
+              id:96,
+              name:"Am Not Eating"
+            }]
           },
           friday: {
-            dinner: [],
-            lunch: []
+            dinner: [{
+              description:"",
+              devless_user_id:1,
+              id:96,
+              name:"Am Not Eating"
+            }],
+            lunch: [{
+              description:"",
+              devless_user_id:1,
+              id:96,
+              name:"Am Not Eating"
+            }]
           },
           saturday: {
-            dinner: [],
-            lunch: []
+            dinner: [{
+              description:"",
+              devless_user_id:1,
+              id:96,
+              name:"Am Not Eating"
+            }],
+            lunch: [{
+              description:"",
+              devless_user_id:1,
+              id:96,
+              name:"Am Not Eating"
+            }]
           }
         },
         options: []
