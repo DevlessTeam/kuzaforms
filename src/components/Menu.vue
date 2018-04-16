@@ -403,7 +403,7 @@
       async fetchMenu() {
         const res = await Devless.queryData("mkoo", "menu");
         if (res.status_code === 625) {
-          this.menus = res.payload.results;
+          this.menus = res.payload.results.reverse();
 
           this.fetchMeals();
           return;
