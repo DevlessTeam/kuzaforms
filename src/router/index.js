@@ -5,6 +5,7 @@ import Settings from "@/components/Settings";
 import Menu from "@/components/Menu";
 import Items from "@/components/Items";
 import MenuView from "@/components/MenuView";
+import MenuDay from "@/components/MenuDay";
 import Meal from "@/components/Meal";
 import Login from "@/components/Login";
 import Register from "@/components/Register";
@@ -16,6 +17,11 @@ Vue.use(Router);
 const router = new Router({
   mode: "hash",
   routes: [
+    {
+      path: "/view-by-day",
+      name: "MenuDay",
+      component: MenuDay
+    },
     {
       path: "/",
       component: Main,
